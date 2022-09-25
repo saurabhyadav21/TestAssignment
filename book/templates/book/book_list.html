@@ -1,0 +1,30 @@
+{% extends 'layouts/default/page.html' %}
+<style>
+  .brd {
+    border: 1px solid;
+  }
+</style>
+{% block content %}
+  <h1>Book List</h1>
+  {% if book_list %}
+  <div class="row" style="border: 1px solid;">
+    <div class="col-md-3" style="border: 1px solid;">Title</div>
+    <div class="col-md-3" style="border: 1px solid;">Author</div>
+    <div class="col-md-3" style="border: 1px solid;">Publisher</div>
+    <div class="col-md-3" style="border: 1px solid;">Publication Date</div>
+  <br><br>
+  </div>
+  
+  {% for book in book_list %}
+  <div class="row" style="border: 1px solid;">
+    <div class="col-md-3" style="border: 1px solid;">{{book.title}}</div>
+    <div class="col-md-3" style="border: 1px solid;">{% for author in book.authors.all %}{{ author.name }}<br/>{% endfor %}</div>
+    <div class="col-md-3" style="border: 1px solid;">{{book.publisher}}</div>
+    <div class="col-md-3" style="border: 1px solid;">{{book.publication_date}}</div>
+  </div>
+    
+    {% endfor %}
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+{% endblock %}
